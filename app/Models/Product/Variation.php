@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Product;
 
 use Carbon\Carbon;
+use App\Casts\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property string $id
- * @property float $price
- * @property float $purchase_price
+ * @property float|integer|string $price
+ * @property float|integer|string $purchase_price
  * @property int $quantity
  * @property string $sku
  * @property string $model
@@ -30,6 +31,11 @@ class Variation extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'price' => Money::class,
+        'purchase_price' => Money::class,
+    ];
 
     /**
      * Retrieve the associated VariationType model.

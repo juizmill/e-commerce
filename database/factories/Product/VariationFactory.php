@@ -22,8 +22,8 @@ class VariationFactory extends Factory
     public function definition(): array
     {
         return [
-            'price' => $this->faker->numberBetween(100, 1000),
-            'purchase_price' => $this->faker->numberBetween(100, 1000),
+            'price' => 'R$ 10,98',
+            'purchase_price' => 'R$ 20,78',
             'quantity' => $this->faker->numberBetween(100, 1000),
             'sku' => $this->faker->ean8,
             'model' => $this->faker->word,

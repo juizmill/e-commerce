@@ -7,7 +7,9 @@ namespace App\Models\Product;
 use Carbon\Carbon;
 use App\Models\HasSlugByName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -32,7 +34,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Product extends Model
 {
-    use HasFactory, HasUuids, HasSlugByName;
+    use HasFactory, HasUuids, SoftDeletes, HasSlugByName;
 
     protected $guarded = ['id'];
 
@@ -64,5 +66,15 @@ class Product extends Model
     public function unityType(): BelongsTo
     {
         return $this->belongsTo(UnityType::class);
+    }
+
+    /**
+     * Get the variations associated with the product.
+     *
+     * @return HasMany The variations' relationship.
+     */
+    public function variations(): HasMany
+    {
+        return $this->hasMany(Variation::class);
     }
 }

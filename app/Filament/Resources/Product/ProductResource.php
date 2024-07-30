@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Product;
 
+use App\Filament\Resources\Product\Form\MeasuresForm;
+use App\Filament\Resources\Product\Form\ProductForm;
+use App\Filament\Resources\Product\Form\TaxesForm;
+use App\Filament\Resources\Product\Form\VariationForm;
 use App\Filament\Resources\Product\ProductResource\Pages;
-use App\Filament\Resources\Product\ProductResource\RelationManagers;
 use App\Models\Product\Product;
-use Filament\Forms;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,49 +26,23 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('ncm')
-                    ->required()
-                    ->maxLength(8),
-                Forms\Components\TextInput::make('cest')
-                    ->maxLength(7),
-                Forms\Components\TextInput::make('warranty')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('height')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('width')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('length')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('weight')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('tax_origin')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('short_description')
-                    ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_active')
-                    ->required(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name'),
-                Forms\Components\Select::make('brand_id')
-                    ->relationship('brand', 'name'),
-                Forms\Components\Select::make('unity_type_id')
-                    ->relationship('unityType', 'name'),
+                Wizard::make([
+                    Wizard\Step::make('Dados do Produto')
+                        ->icon('grommet-schedule-new')
+                        ->schema(ProductForm::create()),
+
+                    Wizard\Step::make('Medidas')
+                        ->icon('tabler-ruler-measure')
+                        ->schema(MeasuresForm::create()),
+
+                    Wizard\Step::make('Taxas')
+                        ->icon('phosphor-chart-bar-horizontal-duotone')
+                        ->schema(TaxesForm::create()),
+
+                    Wizard\Step::make('Variações')
+                        ->icon('sui-episodes')
+                        ->schema(VariationForm::create()),
+                ])->columnSpanFull(),
             ]);
     }
 

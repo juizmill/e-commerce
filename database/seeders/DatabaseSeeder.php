@@ -3,16 +3,15 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Database\Seeders\Product\ImageSeeder;
 use Database\Seeders\Product\BrandSeeder;
-use Database\Seeders\Product\ProductSeeder;
 use Database\Seeders\Product\CategorySeeder;
+use Database\Seeders\Product\ProductSeeder;
 use Database\Seeders\Product\UnityTypeSeeder;
 use Database\Seeders\Product\VariationSeeder;
 use Database\Seeders\Product\VariationTypeSeeder;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -38,7 +37,6 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             VariationTypeSeeder::class,
             VariationSeeder::class,
-            ImageSeeder::class,
         ]);
     }
 }

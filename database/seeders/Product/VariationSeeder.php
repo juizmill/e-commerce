@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Product;
 
-use Illuminate\Database\Seeder;
 use App\Models\Product\Variation;
+use Illuminate\Database\Seeder;
 
 class VariationSeeder extends Seeder
 {

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\Product;
 
-use Illuminate\Database\Seeder;
 use App\Models\Product\UnityType;
+use Illuminate\Database\Seeder;
 
 class UnityTypeSeeder extends Seeder
 {

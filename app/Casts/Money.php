@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace App\Casts;
 
-use Money\Currencies\ISOCurrencies;
-use Money\Formatter\DecimalMoneyFormatter;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
+use Money\Formatter\IntlMoneyFormatter;
 
 class Money implements CastsAttributes
 {
     /**
      * Cast the given value.
      *
-     * @param Model $model
-     * @param string $key
-     * @param mixed $value
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      * @return \Money\Money|null
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): ?\Money\Money
+    public function get(Model $model, string $key, mixed $value, array $attributes): string
     {
         unset($model, $key, $attributes);
-        $value = (string) str_replace([',', '.', ' '], '', (string) $value);
+        $value = (int) str_replace([',', '.', ' '], '', (string) $value);
 
-        return \Money\Money::BRL($value);
+        $money = \Money\Money::BRL($value);
+        $currencies = new ISOCurrencies();
+
+        $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+        $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
+
+        return $moneyFormatter->format($money);
     }
 
     /**
      * Prepare the given value for storage.
      *
-     * @param Model $model
-     * @param string $key
-     * @param mixed $value
-     * @param array<string, mixed> $attributes
-     * @return float
+     * @param  array<string, mixed>  $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): float
     {

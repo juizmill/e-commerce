@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models\Product;
 
-use Carbon\Carbon;
 use App\Models\HasSlugByName;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class UnityType extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasSlugByName;
+    use HasFactory, HasSlugByName, HasUuids, SoftDeletes;
 
     protected $guarded = ['id'];
 }

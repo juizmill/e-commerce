@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Casts;
 
 use App\Casts\Money;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\TestCase;
 
 class MoneyTest extends TestCase
 {

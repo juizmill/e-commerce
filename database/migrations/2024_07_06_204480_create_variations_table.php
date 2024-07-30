@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('pis');
             $table->integer('cofins');
             $table->integer('icms');
+            $table->json('images')->nullable();
 
             $table->foreignUuid('variation_type_id')
                 ->references('id')

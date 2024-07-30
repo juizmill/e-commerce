@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Models\Product;
 
-use Carbon\Carbon;
 use App\Casts\Money;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $id
- * @property float|integer|string $price
- * @property float|integer|string $purchase_price
+ * @property float|int|string $price
+ * @property float|int|string $purchase_price
  * @property int $quantity
  * @property string $sku
  * @property string $model
@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $pis
  * @property int $cofins
  * @property int $icms
+ * @property array $images
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
@@ -36,6 +37,7 @@ class Variation extends Model
     protected $casts = [
         'price' => Money::class,
         'purchase_price' => Money::class,
+        'images' => 'json',
     ];
 
     /**

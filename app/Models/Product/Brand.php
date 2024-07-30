@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Product;
 
-use Carbon\Carbon;
 use App\Models\HasSlugByName;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $id
@@ -24,14 +24,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Brand extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasSlugByName;
+    use HasFactory, HasSlugByName, HasUuids, SoftDeletes;
 
     protected $guarded = ['id'];
 
     /**
      * Retrieves the products associated with this brand.
-     *
-     * @return HasMany
      */
     public function products(): HasMany
     {

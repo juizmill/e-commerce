@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Product;
 
-use Carbon\Carbon;
 use App\Models\HasSlugByName;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $id
@@ -24,14 +24,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Category extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasSlugByName;
+    use HasFactory, HasSlugByName, HasUuids, SoftDeletes;
 
     protected $guarded = ['id'];
 
     /**
      * Retrieve all products belonging to this category.
-     *
-     * @return HasMany
      */
     protected function products(): HasMany
     {
